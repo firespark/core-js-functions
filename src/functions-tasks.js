@@ -101,7 +101,6 @@ function getPolynom(...coefficients) {
 
   return polynom;
 }
-
 /**
  * Memoizes passed function and returns function
  * which invoked first time calls the passed function and then always returns cached result.
@@ -116,10 +115,20 @@ function getPolynom(...coefficients) {
  *   ...
  *   memoizer() => the same random number  (next run, returns the previous cached result)
  */
-function memoize(/* func */) {
-  throw new Error('Not implemented');
-}
+const memoize = (func) => {
+  let cachedResult;
+  let isCached = false;
 
+  const memoizedResult = () => {
+    if (!isCached) {
+      cachedResult = func();
+      isCached = true;
+    }
+    return cachedResult;
+  };
+
+  return memoizedResult;
+};
 /**
  * Returns the function trying to call the passed function and if it throws,
  * retrying it specified number of attempts.
