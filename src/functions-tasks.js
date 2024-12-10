@@ -33,7 +33,7 @@ function getCurrentFunctionName() {
  *
  */
 function getFunctionBody(func) {
-  return (func) ? func.toString() : '';
+  return func ? func.toString() : '';
 }
 
 /**
@@ -87,8 +87,19 @@ function getPowerFunction(exponent) {
  *   getPolynom(8)     => y = 8
  *   getPolynom()      => null
  */
-function getPolynom() {
-  throw new Error('Not implemented');
+function getPolynom(...coefficients) {
+  if (coefficients.length === 0) {
+    return null;
+  }
+
+  // Именованная функция для вычисления полинома
+  const polynom = (x) => {
+    return coefficients.reduce((acc, coef, index) => {
+      return acc + coef * x ** (coefficients.length - index - 1);
+    }, 0);
+  };
+
+  return polynom;
 }
 
 /**
