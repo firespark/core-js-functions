@@ -206,9 +206,11 @@ const logger = (func, logFunc) => {
  *   partialUsingArguments(fn, 'a','b','c')('d') => 'abcd'
  *   partialUsingArguments(fn, 'a','b','c','d')() => 'abcd'
  */
-function partialUsingArguments(/* fn, ...args1 */) {
-  throw new Error('Not implemented');
-}
+const partialUsingArguments = (fn, ...args1) => {
+  return (...args2) => {
+    return fn(...args1, ...args2);
+  };
+};
 
 /**
  * Returns the id generator function that returns next integer starting
